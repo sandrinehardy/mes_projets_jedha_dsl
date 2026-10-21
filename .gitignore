@@ -1,0 +1,51 @@
+# ---------- Secrets (ne JAMAIS publier) ----------
+.env
+*.env
+!.env.example
+*.pem
+*.key
+credentials*
+secrets*
+*.tfvars
+aws_credentials*
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.pytest_cache/
+
+# ---------- Airflow / Docker ----------
+logs/
+**/logs/
+airflow.db
+airflow-webserver.pid
+standalone_admin_password.txt
+
+# ---------- Terraform ----------
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# ---------- MLflow / Ray ----------
+mlruns/
+mlartifacts/
+ray_results/
+
+# ---------- Données volumineuses ----------
+*.parquet
+*.zip
+*.rar
+mongodata/
+data/raw/
+
+# ---------- Systeme / editeurs ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

@@ -1,0 +1,49 @@
+Table countries {
+  country_id int [pk]
+  country_name varchar
+  region varchar
+}
+
+Table merchants {
+  merchant_id int [pk]
+  name varchar
+  country_id int [ref: > countries.country_id]
+}
+
+Table customers {
+  customer_id int [pk]
+  email varchar
+  country_id int [ref: > countries.country_id]
+}
+
+Table payment_methods {
+  payment_method_id int [pk]
+  name varchar [note: "carte, virement, portefeuille"]
+}
+
+Table currencies {
+  currency_code char(3) [pk, note: "EUR, USD, GBP..."]
+  symbol varchar(5) [note: "€, $, £"]
+  exchange_rate decimal(10,4) [note: "taux par rapport au dollar (USD)"]
+}
+
+Table transactions {
+  transaction_id int [pk]
+  merchant_id int [ref: > merchants.merchant_id]
+  customer_id int [ref: > customers.customer_id]
+  payment_method_id int [ref: > payment_methods.payment_method_id]
+  amount decimal(10,2)
+  currency_code char(3) [ref: > currencies.currency_code]
+  transaction_date timestamp
+  ip_country_id int [ref: > countries.country_id, note: "pays de l'adresse IP"]
+  device_type varchar [note: "mobile, desktop"]
+  status varchar [note: "successful, failed, refunded"]
+  fraud_score decimal(3,2) [note: "de 0 à 1"]
+}
+
+Table refunds {
+  refund_id int [pk]
+  transaction_id int [ref: > transactions.transaction_id]
+  amount decimal(10,2)
+  refund_date timestamp
+}

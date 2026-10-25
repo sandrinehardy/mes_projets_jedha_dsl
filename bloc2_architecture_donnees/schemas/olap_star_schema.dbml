@@ -1,0 +1,52 @@
+// Stripe - base OLAP (Snowflake) - schéma en étoile
+// Une ligne de fact_transactions = une transaction
+
+Table fact_transactions {
+  transaction_id int [pk]
+  date_id int [ref: > dim_date.date_id]
+  merchant_id int [ref: > dim_merchant.merchant_id]
+  customer_id int [ref: > dim_customer.customer_id]
+  payment_method_id int [ref: > dim_payment_method.payment_method_id]
+  country_id int [ref: > dim_country.country_id]
+  amount decimal(10,2)
+  currency char(3)
+  status varchar
+  fraud_score decimal(3,2)
+}
+
+Table dim_date {
+  date_id int [pk]
+  full_date date
+  month int
+  year int
+}
+
+Table dim_merchant {
+  merchant_id int [pk]
+  name varchar
+  country varchar
+}
+
+Table dim_customer {
+  customer_id int [pk]
+  country varchar
+}
+
+Table dim_payment_method {
+  payment_method_id int [pk]
+  name varchar
+}
+
+Table dim_country {
+  country_id int [pk]
+  country_name varchar
+  region varchar
+}
+
+// Table de résultats déjà calculés (mise à jour chaque nuit)
+Table daily_revenue {
+  date_id int [ref: > dim_date.date_id]
+  merchant_id int [ref: > dim_merchant.merchant_id]
+  total_amount decimal(12,2)
+  nb_transactions int
+}

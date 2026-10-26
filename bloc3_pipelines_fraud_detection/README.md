@@ -14,7 +14,7 @@ Projet du bloc 3 (pipelines de données, option Lead : orchestration de workflow
 | --- | --- | --- |
 | Vidéo de démonstration (environ 3 min) | Le pipeline en fonctionnement | https://drive.google.com/file/d/1Tm991lNwCVclgYKwdnYMkrh8LKzrrVo9/view?usp=sharing |
 | Captures d'écran | Un écran par outil présenté | [`captures_bloc3_infrastructure.pdf`](captures_bloc3_infrastructure.pdf) |
-| Schéma d'infrastructure | Trajet d'un paiement et détail des deux DAGs | [`schema_infrastructure_bloc3.pptx`](schema_infrastructure_bloc3.pptx) |
+| Schéma d'infrastructure | Trajet d'un paiement et détail des deux DAGs | [`schema_infrastructure_bloc3.pdf`](schema_infrastructure_bloc3.pdf) |
 | Airflow (AWS EC2) | Orchestration des deux DAGs | http://13.36.165.234 (accès limité à mon adresse IP, machine arrêtée après l'examen) |
 | Serveur MLflow (Hugging Face) | Suivi des expériences et registre de modèles | https://huggingface.co/spaces/Sandrine-dsfs36/mlflow-server-lead (espace privé) |
 | Code | Dépôt GitHub (ce dossier) | https://github.com/sandrinehardy/mes_projets_jedha_dsl |
@@ -23,13 +23,15 @@ Les autres services (NeonDB, S3, Discord) n'ont pas de lien public : ils sont mo
 
 ## Architecture
 
+![Schéma d'infrastructure : trajet d'un paiement et détail des deux DAGs](schema_infrastructure_bloc3.png)
+
 | Brique | Rôle | Hébergement |
 | --- | --- | --- |
 | API de transactions | Source des paiements, une transaction par appel | Jedha |
-| Airflow 3.3.2 (Docker Compose) | Orchestre les deux DAGs, calcule la prédiction | AWS EC2 (t3.medium) |
+| Airflow 3.3.2 (Docker Compose) | Orchestre les deux DAGs, calcule la prédiction | AWS EC2 |
 | MLflow 3.17.2 | Registre de modèles (alias `production`, tag `threshold`) | Hugging Face (Space Docker) |
 | NeonDB (PostgreSQL) | `fraud_db` : table `transactions` ; `mlflow_db` : registre MLflow | Neon |
-| Amazon S3 | `raw/` : JSON bruts de l'API ; `mlflow-artifacts/` : fichiers du modèle | AWS |
+| Amazon S3 | `raw/` : JSON bruts de l'API ; `mlflow-artifacts/` : fichiers du modèle | AWS S3|
 | Discord | Alertes de fraude et rapport quotidien | Discord (webhook) |
 
 ### Le trajet d'un paiement
@@ -55,9 +57,10 @@ Les tâches s'échangent de petits objets par XCom (la transaction, le résultat
 - `train.py` : entraînement du modèle et enregistrement dans MLflow (alias `production`, tag `threshold`)
 - `01_eda_modele_fraude.ipynb` : exploration des données et choix du modèle
 - `mlflow_server/` : `Dockerfile` du serveur MLflow déployé sur Hugging Face
-- `airflow/` : `Dockerfile`, `docker-compose.yaml`, `requirements.txt`, `.env.example` et `dags/` (les deux DAGs et un DAG de test des connexions)
+- `airflow/` : `Dockerfile`, `docker-compose.yaml`, `requirements.txt`, `.env.example` et `dags/`
 - `captures_bloc3_infrastructure.pdf` : captures d'écran de l'infrastructure en fonctionnement
-- `schema_infrastructure_bloc3.pptx` : schéma d'infrastructure
+- `schema_infrastructure_bloc3.pdf` : schéma d'infrastructure
+- `schema_infrastructure_bloc3.png` : image du schéma (affichée dans ce README)
 
 ## Variables d'environnement
 

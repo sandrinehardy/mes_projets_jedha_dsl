@@ -4,14 +4,14 @@ Livrables de la certification **AI Architect** (Jedha, parcours Lead Data Scienc
 
 Auteure : Sandrine Hardy
 
-## Contenu du dépôt
+## Contenu
 
-| Bloc | Intitulé | Projet | Dossier | Statut |
-|------|----------|--------|---------|--------|
-| 1 | Concevoir et piloter la gouvernance des données et des systèmes d'IA | Spotify | `bloc1_gouvernance/` | À faire |
-| 2 | Concevoir et déployer l'infrastructure de données et de calcul pour l'IA | From SQL to NoSQL (Stripe) | `bloc2_architecture_donnees/` | À faire |
-| 3 | Concevoir et mettre en oeuvre des pipelines de données pour l'IA | Automatic Fraud Detection (Workflow Orchestration) | `bloc3_pipelines_fraud_detection/` | En cours |
-| 4 | Concevoir et piloter l'industrialisation et le déploiement de solutions d'IA | Final project | `bloc4_projet_final/` | À faire |
+| Bloc | Intitulé | Projet | Dossier |
+|------|----------|--------|---------|
+| 1 | Concevoir et piloter la gouvernance des données et des systèmes d'IA | Spotify | `bloc1_gouvernance/` |
+| 2 | Concevoir et déployer l'infrastructure de données et de calcul pour l'IA | From SQL to NoSQL (Stripe) | `bloc2_architecture_donnees/` |
+| 3 | Concevoir et mettre en oeuvre des pipelines de données pour l'IA | Automatic Fraud Detection (Workflow Orchestration) | `bloc3_pipelines_fraud_detection/` |
+| 4 | Concevoir et piloter l'industrialisation et le déploiement de solutions d'IA | Final project | [Repo dédié : REnergies_efficiency_prediction_Lead](https://github.com/sandrinehardy/REnergies_efficiency_prediction_Lead) |
 
 ## Structure type d'un bloc
 

@@ -1,6 +1,3 @@
-// Stripe - base OLAP (Snowflake) - schéma en étoile
-// Une ligne de fact_transactions = une transaction
-
 Table fact_transactions {
   transaction_id int [pk]
   date_id int [ref: > dim_date.date_id]

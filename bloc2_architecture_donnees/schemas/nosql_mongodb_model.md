@@ -2,9 +2,6 @@
 
 Les identifiants (transaction_id, customer_id, merchant_id) sont les mêmes que dans la base OLTP.
 
-**Règle :**
-- **Imbriqué** : on met la donnée dans le document si elle est petite et lue avec lui.
-- **Référencé** : on garde seulement l'identifiant si la donnée est partagée ou peut changer.
 
 ## 1. logs
 ```json
